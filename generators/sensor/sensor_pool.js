@@ -11,7 +11,6 @@ console.log(date.toISOString())
 
 for (i=0; i<100; i++) {
   humid = (Math.random() * (45.00 - 35.00) + 35.00).toFixed(2)
-  pressure = (Math.floor(Math.random() * (0.00 - 999999.00) + 999999.00))
   temperature = (Math.floor(Math.random() * (0.00 - 300.00) + 300.00))
   date = new Date()
 //  i++
