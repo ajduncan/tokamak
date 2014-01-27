@@ -1,0 +1,14 @@
+{
+  "name": "sensor-generator",
+  "description": "A package which generates random sensor data.",
+  "author": "Andy Duncan <ajduncan@gmail.com>",
+  "dependencies": {
+    "superagent": "0.15.x",
+    "express": "3.4.x",
+    "expectjs": "0.0.x",
+    "mongoskin": "0.6.x",
+    "mocha": "1.13.x"
+  },
+  "engine": "node >= 0.10.18"
+}
+
