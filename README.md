@@ -50,5 +50,5 @@ Client refresh cycle:
 
 Tests:
 
-    $ ./node_modules/mocha/bin/mocha tokamak.test.js 
+    $ ./node_modules/mocha/bin/mocha sensor.test.js 
 
