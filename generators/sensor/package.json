@@ -5,7 +5,7 @@
   "dependencies": {
     "superagent": "0.15.x",
     "express": "3.4.x",
-    "expectjs": "0.0.x",
+    "expect.js": "0.2.x",
     "mongoskin": "0.6.x",
     "mocha": "1.13.x"
   },
