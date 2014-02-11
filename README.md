@@ -17,12 +17,12 @@ Ubuntu 13.10:
     $ sudo apt-get update
     $ sudo apt-get upgrade
     $ sudo apt-get install nodejs nodejs-dev npm mongodb
-    $ cd generators
+    $ cd generators/sensor
     $ npm install
     $ npm test
 
     # npm install superagent
-    # npm install expectjs
+    # npm install expect.js
     # npm install express
     # npm install mongoskin
     # npm install mocha
