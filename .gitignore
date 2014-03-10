@@ -1,3 +1,4 @@
+.vagrant
 /generators/sensor/express_api
 /generators/sensor/node_modules
 
