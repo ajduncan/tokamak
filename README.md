@@ -52,3 +52,17 @@ Tests:
 
     $ ./node_modules/mocha/bin/mocha sensor.test.js 
 
+## Vagrant ##
+
+### Using Ubuntu 13.10 ###
+    Install the latest VirtualBox and then see:
+
+    1. http://stackoverflow.com/questions/17100926/vagrant-has-detected-that-you-have-a-version-of-virtualbox-installed-that-is-not
+
+    sudo apt-get purge virtualbox-dkms
+    sudo apt-get inbstall virtualbox-dkms
+
+    2. http://www.woolie.co.uk/article/vagrant-shared-directory-hangs-ubuntu-13-10/
+
+    $ vagrant plugin install --plugin-source https://rubygems.org --plugin-prerelease vagrant-vbguest
+    $ vagrant up
