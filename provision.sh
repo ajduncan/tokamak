@@ -24,8 +24,39 @@ echo "Upgrading system packages..."
 apt-get -y upgrade > /dev/null 2>&1
 
 # Install system dependencies.
-echo "Installing system dependencies: nodejs nodejs-dev npm mongodb..."
-apt-get -y install nodejs nodejs-dev npm mongodb > /dev/null 2>&1
+echo "Installing system dependencies: git, nodejs nodejs-dev npm mongodb..."
+apt-get -y install git nodejs nodejs-dev npm mongodb > /dev/null 2>&1
+
+# Make sure 'node' is linked to nodejs
+if [ ! -f /usr/bin/node ];
+then
+	echo "Creating operating system symbolic links."
+	ln -s /usr/bin/nodejs /usr/bin/node
+fi
+
+# Make sure we have bower and grunt installed using npm.
+if [ -x /usr/bin/npm ];
+then
+	echo "Installing node dependencies."
+	/usr/bin/npm install -g grunt-cli
+	/usr/bin/npm install -g bower
+fi
+
+if [ ! -d /home/vagrant/mean ];
+then
+	echo "Installing mean.io stack..."
+	cd /home/vagrant/
+	sudo -u vagrant git clone http://github.com/linnovate/mean.git > /dev/null 2>&1
+	cd /home/vagrant/mean
+	sudo -u vagrant npm install > /dev/null 2>&1
+fi
+
+if [ -d /home/vagrant/mean ];
+then
+	echo "Running mean.io stack."
+	cd /home/vagrant/mean
+	sudo -u vagrant grunt &
+fi
 
 # Remove previous timestamp-started file.
 if [ -f /home/vagrant/started ];
