@@ -13,5 +13,10 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 22, host: 2202
   config.vm.network "forwarded_port", guest: 5858, host: 5858
   config.vm.network "forwarded_port", guest: 3000, host: 3000
-  config.vm.provision "shell", path: "provision.sh"
+  # config.vm.provision "shell", path: "provision.sh"
+  require 'rbconfig'
+  config.vm.provision "shell" do |sh|
+    sh.path = "ansible/ansible.sh"
+    sh.args = "ansible/vagrant.yml ansible/hosts"
+  end
 end

@@ -1,0 +1,36 @@
+- name: Create the mean.io stack
+  git: repo=http://github.com/linnovate/mean.git dest={{ mean_directory }}
+  sudo: true
+  sudo_user: "{{ user_name }}"
+
+- name: Node.js | Install stack dependencies
+  npm: name={{ item }} global=no path={{ mean_directory }}/node_modules
+  sudo: true
+  sudo_user: "{{ user_name }}"
+  with_items:
+    - bower
+    - grunt-cli
+
+- name: Install mean.io packages.
+  npm: path={{ mean_directory }}
+  sudo: true
+  sudo_user: "{{ user_name }}"
+
+- name: Install supervisord config file
+  template: src=supervisord.conf.j2 dest=/etc/supervisor/supervisord.conf owner=root mode=0600
+
+- name: Install mean.io supervisor config file
+  template: src=supervisord_mean.conf.j2 dest=/etc/supervisor/conf.d/mean.conf
+  sudo: yes
+
+- name: reload supervisord
+  command: supervisorctl reload
+  sudo: yes
+
+- name: Make sure mean.io stack is present.
+  sudo: yes
+  action: supervisorctl name={{ project_name }} state=present
+
+#- name: Make sure mean.io stack has started.
+#  sudo: yes
+#  action: supervisorctl name={{ project_name }} state=started

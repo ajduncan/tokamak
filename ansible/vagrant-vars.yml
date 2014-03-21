@@ -1,0 +1,15 @@
+vagrant: true
+locale: en_US.UTF-8
+use_supervisor_http_server: true
+supervisor_http_username: vagrant
+supervisor_http_password: vagrant
+user_name: vagrant
+user_directory: /home/{{ user_name }}
+project_name: tokamak
+mean_directory: "{{ user_directory }}/mean"
+project_directory: /{{ user_name }}
+
+hostname: localhost
+dbuser: tokamak
+dbname: tokamak
+dbpassword: tokamak
