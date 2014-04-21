@@ -1,0 +1,20 @@
+{
+  "name": "tokamak",
+  "version": "0.0.1",
+  "description": "Basic interface to sensor fusion app.",
+  "author": {
+    "name": "Andrew Duncan <ajduncan@gmail.com>"
+  },
+  "mean" : true,
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.4.x"
+  },
+  "dependencies": {
+    "mongoskin": "1.4.x",
+    "superagent": "0.17.x",
+    "expect.js": "0.3.x",
+    "mocha": "1.18.x"
+  },
+  "license": "MIT"
+}

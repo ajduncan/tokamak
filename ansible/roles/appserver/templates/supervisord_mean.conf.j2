@@ -1,5 +1,5 @@
 [program:{{ project_name }}]
-command={{ mean_directory }}/node_modules/.bin/grunt
+command=grunt
 directory={{ mean_directory }}
 user={{ user_name }}
 stdout_logfile=/var/log/supervisor_{{ project_name }}.log

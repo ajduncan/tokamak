@@ -6,7 +6,8 @@ supervisor_http_password: vagrant
 user_name: vagrant
 user_directory: /home/{{ user_name }}
 project_name: tokamak
-mean_directory: "{{ user_directory }}/mean"
+mean_directory: "{{ user_directory }}/{{ project_name }}"
+tokamak_package_directory: "{{ mean_directory }}/packages/tokamak"
 project_directory: /{{ user_name }}
 
 hostname: localhost
