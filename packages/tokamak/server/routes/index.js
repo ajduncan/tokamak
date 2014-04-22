@@ -3,28 +3,38 @@
 // The Package is past automatically as first parameter
 module.exports = function(Tokamak, app, auth, database) {
 
-    app.get('/tokamak/example/anyone', function (req, res, next) {
-      res.send('Anyone can access this');
-    });
+  /* Sensor */
+  var mongoskin = require('mongoskin');
+  var db = mongoskin.db('mongodb://localhost/sensor', {safe:true});
 
-    app.get('/tokamak/example/auth',auth.requiresLogin, function (req, res, next) {
-      res.send('Only authenticated users can access this');
-    });
+  app.get('/tokamak/example/anyone', function (req, res, next) {
+    res.send('Anyone can access this');
+  });
 
-    app.get('/tokamak/example/admin',auth.requiresAdmin, function (req, res, next) {
-      res.send('Only users with Admin role can access this');
-    });
+  app.get('/tokamak/example/auth',auth.requiresLogin, function (req, res, next) {
+    res.send('Only authenticated users can access this');
+  });
 
-    app.get('/tokamak/example/render', function (req, res, next) {
-      Tokamak.render('index', {package:'tokamak'}, function (err, html) {
+  app.get('/tokamak/example/admin',auth.requiresAdmin, function (req, res, next) {
+    res.send('Only users with Admin role can access this');
+  });
+
+  app.get('/tokamak/example/render', function (req, res, next) {
+    var raw_feed;
+    db.collection('sensor').find().count(function (err, count) {
+      req.collection.find({}, {limit:100, sort: [['timestamp', -1]]}).toArray(function(e, results) {
+        if (e) {
+          return next(e);
+        }
+        raw_feed = results;
+      });
+
+      Tokamak.render('index', {raw_feed: raw_feed}, function (err, html) {
         //Rendering a view from the Package server/views
         res.send(html);
       });
     });
-
-  /* Sensor */
-  var mongoskin = require('mongoskin');
-  var db = mongoskin.db('mongodb://localhost/sensor', {safe:true});
+  });
 
   app.param('collectionName', function(req, res, next, collectionName) {
     req.collection = db.collection(collectionName);

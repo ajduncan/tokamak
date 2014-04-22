@@ -34,6 +34,10 @@
   template: src=supervisord_mean.conf.j2 dest=/etc/supervisor/conf.d/mean.conf
   sudo: yes
 
+- name: Install tokamak sensor pool supervisor config file
+  template: src=supervisord_spool.conf.j2 dest=/etc/supervisor/conf.d/spool.conf
+  sudo: yes
+
 - name: reload supervisord
   command: supervisorctl reload
   sudo: yes
@@ -41,3 +45,10 @@
 - name: Make sure mean.io stack is present.
   sudo: yes
   action: supervisorctl name={{ project_name }} state=present
+
+- name: Wait for service to come up.
+  wait_for: port=3000 delay=5
+
+- name: Make sure sensor pool is present.
+  sudo: yes
+  action: supervisorctl name={{ project_name }}_spool state=present

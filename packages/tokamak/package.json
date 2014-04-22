@@ -14,6 +14,7 @@
     "mongoskin": "1.4.x",
     "superagent": "0.17.x",
     "expect.js": "0.3.x",
+    "sleep": "1.1.x",
     "mocha": "1.18.x"
   },
   "license": "MIT"

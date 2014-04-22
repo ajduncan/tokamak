@@ -1,0 +1,8 @@
+[program:{{ project_name }}_spool]
+command=nodejs {{ mean_directory }}/packages/tokamak/sensor_pool.js
+directory={{ mean_directory }}/packages/tokamak/
+user={{ user_name }}
+stdout_logfile=/var/log/supervisor_{{ project_name }}_spool.log
+redirect_stderr=true
+autostart=true
+autorestart=true
